@@ -3,19 +3,14 @@ use strict;
 use base qw(Sledge::Pages::Base);
 
 use vars qw($VERSION);
-$VERSION = '0.01';
+$VERSION = '0.02';
 
 use Apache;
-use Apache::Request::I18N;
+use Sledge::Request::Apache::I18N;
 
 sub create_request {
-    my ($self, $r) = @_;
-    my $req = Apache::Request::I18N->new(
-        $r || Apache->request,
-        DECODE_PARMS => 'utf-8',
-    );
-    #    $req->param; do parse here
-    return $req;
+    my($self, $r) = @_;
+    return Sledge::Request::Apache::I18N->new($r || Apache->request);
 }
 
 1;
